@@ -215,9 +215,11 @@ jobs:
         mem: 8192
         copyback: false
         prepare: |
-          pkg install -y curl
+          pkg install -y curl ca_root_nss
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain ${{matrix.toolchain}}
         run: |
           . "${HOME}/.cargo/env"
+          # Try to avoid https://github.com/rustls/rustls-native-certs/issues/28
+          export SSL_CERT_FILE=/usr/local/share/certs/ca-root-nss.crt
           export RUST_BACKTRACE=full
           cargo test --target ${{matrix.target}} --features ${{matrix.features}}
