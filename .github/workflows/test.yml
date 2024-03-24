@@ -219,4 +219,5 @@ jobs:
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain ${{matrix.toolchain}}
         run: |
           . "${HOME}/.cargo/env"
+          export RUST_BACKTRACE=full
           cargo test --target ${{matrix.target}} --features ${{matrix.features}}
