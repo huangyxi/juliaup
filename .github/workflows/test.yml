@@ -218,4 +218,4 @@ jobs:
           pkg install -y curl
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain ${{matrix.toolchain}}
           . "${HOME}/.cargo/env"
-        run: cargo test --target ${{matrix.target}} --features ${{matrix.features}}
+        run: "${HOME}/.cargo/bin/cargo" test --target ${{matrix.target}} --features ${{matrix.features}}
